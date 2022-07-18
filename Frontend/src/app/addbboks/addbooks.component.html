@@ -1,0 +1,126 @@
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+           
+            aria-controls="navbarCenteredExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+      
+          <a class="navbar-brand" href="#">
+           
+            <small id="t">LIBRARY APP</small>
+          </a>
+
+          <!-- Collapsible wrapper -->
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarCenteredExample"
+           
+          >
+            <!-- Left links -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+               
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="/bookpage">Books</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="/addbooks">Add Books</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="/">Logout</a>
+              </li>
+              
+             
+             
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content white-text">
+              <div class="row">
+                <div class="col s5">
+                  <form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm)">
+                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="bookService.selectedBook._id">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input type="text" name="title" #name="ngModel" [(ngModel)]="bookService.selectedBook.title"  required>
+                        <label>Title :
+                          <label class="red-text">*</label>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input type="text" name="author" #name="ngModel" [(ngModel)]="bookService.selectedBook.author" >
+                        <label>Author Name</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input type="text" name="about" #name="ngModel" [(ngModel)]="bookService.selectedBook.about" >
+                        <label>About :</label>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <button class="btn btn-custom right" type="button" (click)="resetForm(bookForm)">Reset</button>
+                        <button class="btn btn-custom right" type="submit" [disabled]="!bookForm.valid">Submit</button>
+                    <br>
+                    <br>
+                    <br>  
+                    </div>
+                    </div>
+                  </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col s7">
+    <table class="responsive-table highlight">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>About</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr *ngFor="let emp of bookService.books">
+          <td>{{emp.title}}</td>
+          <td>{{emp.author}}</td>
+          <td>{{emp.about}}</td>
+          <td>
+              <a class="action-btn" (click)="onEdit(emp)">
+                <i class="material-icons">edit</i>
+              </a>
+              <a class="action-btn" (click)="onDelete(emp._id,bookForm)">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
+        </tr>
+      </table>
+</div>
+
+
