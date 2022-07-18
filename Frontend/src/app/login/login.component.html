@@ -1,0 +1,46 @@
+<app-header></app-header>
+<section id="home" [ngStyle]="{backgroundImage:'url(assets/lib3.jpg)'}" class="d-flex flex-column justify-content-center align-items-center">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+           <div class="card">
+            <div class="text-center">
+                <h1>LOGIN</h1>
+                <H6>Please enter e-mail & password !!</H6>
+            </div> 
+            <form >
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                      <span class="text-danger" *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required','email')">*Email ID is required</span>
+                      <span class="text-danger" *ngIf="loginForm.controls['email'].touched && loginForm.hasError('pattern','email')">*Email ID not in correct format</span>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input formControlName="password"  type="password" class="form-control" id="exampleInputPassword1">
+                      <span class="text-danger" *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">*Password of miimun 6 characters is required</span>
+                      <span class="text-danger" *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('minLength','password')">*Password should be minimum 6 characters</span>
+                    </div>
+                     <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">LOGIN</button>
+                  </form>
+            </form>
+            <br>
+            <a routerLink="/signup">New User? Click Sign Up</a>
+           </div>
+        </div>
+
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</section>
