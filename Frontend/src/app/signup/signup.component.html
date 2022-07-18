@@ -1,0 +1,58 @@
+<app-header></app-header>
+<section id="home" [ngStyle]="{backgroundImage:'url(assets/lib3.jpg)'}" class="d-flex flex-column justify-content-center align-items-center">
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+         <div class="card">
+          <div class="text-center">
+              <h1>SIGNUP</h1>
+              <H6>Register here !!</H6>
+          </div> 
+
+<form #signupForm="ngForm" (ngSubmit)="signupForm.valid && onSubmit(signupForm)">
+  <input type="text" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullname" name="fullName" placeholder="Full Name"
+  required  [ngClass]="{'invalid-textbox' :signupForm.submitted && !fullName.valid }">
+  <div *ngIf="signupForm.submitted && !fullName.valid">
+    <label class="validation-message">This field is required.</label>
+  </div>
+
+  <input type="text" #mobile="ngModel" [(ngModel)]="userService.selectedUser.mobile" name="mobile" placeholder="Mobile No"
+  required [pattern]="mobRegex"  [ngClass]="{'invalid-textbox' :signupForm.submitted && !mobile.valid }">
+  <div *ngIf="signupForm.submitted && email.errors">
+    <label *ngIf="mobile.errors" class="validation-message">This field is required/not in correct format.</label>
+    <!-- <label *ngIf="mobile.errors.pattern" class="validation-message">Invalid mobile number</label> -->
+  </div>
+  <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email"
+  required [pattern]="emailRegex"  [ngClass]="{'invalid-textbox' :signupForm.submitted && !email.valid }">
+  <div *ngIf="signupForm.submitted && email.errors">
+    <span class="text-danger" *ngIf="email.errors" class="validation-message">This field is required/Not in correct format.</span>
+    <!-- <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label> -->
+  </div>
+  <input type="password" #password="ngModel" [(ngModel)]="userService.selectedUser.password" name="password" placeholder="Password"
+  minlength="6" required [ngClass]="{'invalid-textbox' :signupForm.submitted && !password.valid }">
+  <div *ngIf="signupForm.submitted && password.errors">
+    <label *ngIf="password.errors" class="validation-message">This field is required & password of minimum 6 characters.</label>
+    <!-- <label *ngIf="password.errors.minlength" class="validation-message">Enter atleast 4 characters.</label> -->
+  </div>
+  <input id="bt" [disabled]="!signupForm.valid" type="submit" value="Sign Up">
+</form>
+
+<!-- Success message -->
+<div class="success" *ngIf="showSucessMessage">
+  Saved successfully
+</div>
+<a routerLink="/login">Already have account?? Click to Login</a>
+
+<!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+  {{serverErrorMessages}}
+</div>
+</div>
+</div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+</section>
